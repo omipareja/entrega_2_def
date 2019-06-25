@@ -45,6 +45,11 @@ public class tipoPregunta extends javax.swing.JPanel {
         jLabel1.setText("Elija el tipo de pregunta");
 
         jButton1.setText("regresar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("salir");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -121,6 +126,12 @@ public class tipoPregunta extends javax.swing.JPanel {
         // TODO add your handling code here:
        
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+                (pnl.getFrm()).cambiar_tarjeta("inicio");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

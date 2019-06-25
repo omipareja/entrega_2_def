@@ -1,36 +1,61 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 
+import Modelo.Prueba;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author juan
  */
 public class Archivos {
     
-    
-       public void escribir(String cadena){
-        try{
-            FileWriter escribir = new FileWriter("Prueba.txt");
-            //BufferedWriter buffer = new BufferedWriter(escribir);
-            //PrintWriter Imprimir = new PrintWriter(archivo);
+     private static Archivos instance;
 
-            for(int i = 0; i < cadena.length(); i++){
-                
-                escribir.write(cadena.charAt(i));
-            }
-            
-            escribir.close();
+    private Archivos() {
+    }
+    
+    
+      public static Archivos getInstance() {
+        if (instance == null) {
+            instance = new Archivos();
         }
-        catch(IOException e){
+        return instance;
+    }
+
+    public Prueba cargarPrueba() {
+        Prueba prueba = null;
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Examen.cad"))) {
+            Object readObject = ois.readObject();
+            if (readObject != null && readObject instanceof Prueba) {
+                prueba = ((Prueba) readObject);
+            }
+        } catch (Exception ex) {
+              System.out.println("Error al leer archivo: " + ex);
+        }
+
+        return prueba;
+    }
+
+    public void guardarPrueba(Prueba prueba) throws IOException {
+        try {
+            /*try (ObjectOutputStream ois = new ObjectOutputStream(new FileOutputStream("Examen.cad"))) {
+            ois.writeObject(prueba);
+            } catch (Exception ex) {
+            System.out.println("Error al escribir archivo: " + ex);
+            }*/
             
+            ObjectOutputStream ois = new ObjectOutputStream(new FileOutputStream("Examen.cad"));
+            ois.writeObject(prueba);
+            ois.close();
+        } catch (FileNotFoundException ex) {
+        Logger.getLogger(Archivos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
