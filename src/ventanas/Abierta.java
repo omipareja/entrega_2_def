@@ -136,12 +136,13 @@ public class Abierta extends javax.swing.JPanel {
 
     private void btsiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsiguienteActionPerformed
         // TODO add your handling code here:
-            pnl.cambiar_tarjeta("tipo");
+          
             String pregunta;
             int valor;
             pregunta = enun.getText();
            valor = Integer.parseInt(txtvalor.getText().trim());
         ProfesorControlador.getInstance().agregarPreguntaAbierta(pregunta, valor);
+          pnl.cambiar_tarjeta("tipo");
     }//GEN-LAST:event_btsiguienteActionPerformed
 
 

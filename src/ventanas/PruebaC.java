@@ -5,6 +5,7 @@
  */
 package ventanas;
 
+import controlador.ProfesorControlador;
 import java.awt.CardLayout;
 
 /**
@@ -34,6 +35,12 @@ public class PruebaC extends javax.swing.JPanel {
     
     
     public void cambiar_tarjeta(String tarjeta){
+          if(tarjeta.equals("abierta1")){
+          abierta1.limpiarCampos();
+        }
+        else if(tarjeta.equals("Unica"))
+            unicarespuesta1.limpiarCampos();
+        
         ((CardLayout) jPanel2.getLayout()).show(jPanel2,tarjeta);
     }
     
@@ -58,7 +65,8 @@ public class PruebaC extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        descripcion = new javax.swing.JTextArea();
+        terminar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         tipoPregunta1 = new ventanas.tipoPregunta();
         unicarespuesta1 = new ventanas.Unicarespuesta();
@@ -66,9 +74,16 @@ public class PruebaC extends javax.swing.JPanel {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Descripcion"));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        descripcion.setColumns(20);
+        descripcion.setRows(5);
+        jScrollPane1.setViewportView(descripcion);
+
+        terminar.setText("Terminar Prueba");
+        terminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                terminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -76,21 +91,26 @@ public class PruebaC extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(terminar)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(terminar))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setLayout(new java.awt.CardLayout());
         jPanel2.add(tipoPregunta1, "tipo");
         jPanel2.add(unicarespuesta1, "Unica");
-        jPanel2.add(abierta1, "abierta");
+        jPanel2.add(abierta1, "abierta1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -116,13 +136,24 @@ public class PruebaC extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void terminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminarActionPerformed
+        // TODO add your handling code here:
+        
+        String Descripcion;
+        Descripcion = descripcion.getText();
+        Frm.cambiar_tarjeta("principal");
+        ProfesorControlador.getInstance().agregarDescripcion(Descripcion);
+        ProfesorControlador.getInstance().guardarPruebaArchivo();
+    }//GEN-LAST:event_terminarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private ventanas.Abierta abierta1;
+    private javax.swing.JTextArea descripcion;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JButton terminar;
     private ventanas.tipoPregunta tipoPregunta1;
     private ventanas.Unicarespuesta unicarespuesta1;
     // End of variables declaration//GEN-END:variables

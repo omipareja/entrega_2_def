@@ -43,19 +43,18 @@ public class Archivos {
         return prueba;
     }
 
-    public void guardarPrueba(Prueba prueba) throws IOException {
-        try {
-            /*try (ObjectOutputStream ois = new ObjectOutputStream(new FileOutputStream("Examen.cad"))) {
+   
+        public void guardarPrueba(Prueba prueba) {
+        //try {
+            try (ObjectOutputStream ois = new ObjectOutputStream(new FileOutputStream("Examen.cad"))) {
             ois.writeObject(prueba);
             } catch (Exception ex) {
-            System.out.println("Error al escribir archivo: " + ex);
-            }*/
+                
+             Logger.getLogger(Archivos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             
-            ObjectOutputStream ois = new ObjectOutputStream(new FileOutputStream("Examen.cad"));
-            ois.writeObject(prueba);
-            ois.close();
-        } catch (FileNotFoundException ex) {
-        Logger.getLogger(Archivos.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
-    }
+        
 }
